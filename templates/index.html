@@ -6,7 +6,7 @@
     <div class="jumbotron">
         <h1>{{ motivator.text }}</h1>
 
-        Author: {{ motivator.author }}<br>
+        Author: {{ motivator.author.first_name }} {{ motivator.author.last_name }}<br>
         Created on: {{ motivator.created_on }}
     </div>
     {% endfor %}

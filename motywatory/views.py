@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, FormView
 
 from motywatory import recaptcha
 from motywatory.models import Motivator
@@ -10,10 +10,9 @@ def index(request):
     motivators = Motivator.objects.all().order_by('created_on').reverse()
     return render(request, 'index.html', {'motivators': motivators})
 
-class AddView(CreateView):
+class AddView(FormView):
     template_name = 'add.html'
-    #form_class = MotivatorForm
-    model = Motivator
+    form_class = MotivatorForm
     success_url = '/'
 
     def form_valid(self, form):
@@ -24,8 +23,8 @@ class AddView(CreateView):
         RecaptchaRsp = recaptcha.submit(self.request.POST['recaptcha_challenge_field'], \
         self.request.POST['recaptcha_response_field'], '6LcLO-0SAAAAAMZKja_hev3pXpSDooEJ7iH-QQyp', '')
         if RecaptchaRsp.is_valid:
-            print 'dodajemy'
             form.instance.author = self.request.user
+            form.save()
             return super(AddView, self).form_valid(form)
         else:
             return False # todo - check this one
