@@ -3,12 +3,21 @@
 
 {% block content %}
 
-    <form action="/add" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {% captcha "6LcLO-0SAAAAAM6PriLyB5PyKB3BuScrofKaP1N9" %}
-        <br />
-        <input type="submit" value="Send new" />
-    </form>
+    <div class="jumbotron">
+        <h1>Add new motivator</h1>
+        <form action="/add" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                {{ field.errors }}
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+            {% endfor %}
+            {% captcha "6LcLO-0SAAAAAM6PriLyB5PyKB3BuScrofKaP1N9" %}
+            <br />
+            <input type="submit" value="Send new" class="btn btn-lg btn-success"/>
+        </form>
+    </div>
 
 {% endblock %}
