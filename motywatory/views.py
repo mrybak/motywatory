@@ -10,7 +10,7 @@ def index(request):
     motivators = Motivator.objects.all().order_by('created_on').reverse()
     return render(request, 'index.html', {'motivators': motivators})
 
-class add(FormView):
+class AddView(FormView):
     template_name = 'add.html'
     form_class = MotivatorForm
     success_url = '/'
@@ -19,11 +19,12 @@ class add(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
 
-        print request.POST
-        RecaptchaRsp = recaptcha.submit(request.POST['recaptcha_challenge_field'], \
-        request.POST['recaptcha_response_field'], '6LcLO-0SAAAAAMZKja_hev3pXpSDooEJ7iH-QQyp', '')
+        print self.request.POST
+        RecaptchaRsp = recaptcha.submit(self.request.POST['recaptcha_challenge_field'], \
+        self.request.POST['recaptcha_response_field'], '6LcLO-0SAAAAAMZKja_hev3pXpSDooEJ7iH-QQyp', '')
         if RecaptchaRsp.is_valid:
-            return super(ContactView, self).form_valid(form) 
+            print 'dodajemy'
+            return super(AddView, self).form_valid(form)
         else:
             return False # todo - check this one
 

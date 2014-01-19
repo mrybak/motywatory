@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import login_required
-from motywatory.views import add
+from motywatory.views import AddView
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -9,7 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'motywatory.views.index', name='index'),
-    url(r'^add$', login_required(add.as_view()), name='add'),
+    url(r'^add$', login_required(AddView.as_view()), name='add'),
     # url(r'^jnp3/', include('jnp3.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
