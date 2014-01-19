@@ -6,6 +6,7 @@
     <form method="get" action=".">
            {{ form.q }}
            <input type="submit" value="Search">
+    </form>
 
         {% if query %}
             <h3>Results</h3>
@@ -34,5 +35,5 @@
         {% else %}
             {# Show some example queries to run, maybe query syntax, something else? #}
         {% endif %}
-    </form>
+
 {% endblock %}

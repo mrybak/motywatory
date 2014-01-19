@@ -6,9 +6,8 @@
     <form action="/add" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <div class="jumbotron">
-            {% captcha "6LcLO-0SAAAAAM6PriLyB5PyKB3BuScrofKaP1N9" %}
-        </div>
+        {% captcha "6LcLO-0SAAAAAM6PriLyB5PyKB3BuScrofKaP1N9" %}
+        <br />
         <input type="submit" value="Send new" />
     </form>
 
