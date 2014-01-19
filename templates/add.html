@@ -3,8 +3,13 @@
 
 {% block content %}
 
-    <div class="jumbotron">
-        {% captcha "6LcLO-0SAAAAAM6PriLyB5PyKB3BuScrofKaP1N9" %}
-    </div>
+    <form action="/add" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="jumbotron">
+            {% captcha "6LcLO-0SAAAAAM6PriLyB5PyKB3BuScrofKaP1N9" %}
+        </div>
+        <input type="submit" value="Send new" />
+    </form>
 
 {% endblock %}
