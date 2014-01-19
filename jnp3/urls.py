@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'motywatory.views.index', name='index'),
     url(r'^add$', login_required(AddView.as_view()), name='add'),
+
+    url(r'^search/', include('haystack.urls')),
     # url(r'^jnp3/', include('jnp3.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

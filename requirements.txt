@@ -2,3 +2,4 @@ git+https://github.com/django-nonrel/django@nonrel-1.5
 git+https://github.com/django-nonrel/djangotoolbox
 git+https://github.com/django-nonrel/mongodb-engine
 python-social-auth==0.1.20
+django-haystack==2.1.0
