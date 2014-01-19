@@ -7,6 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'motywatory.views.index', name='index'),
+    url(r'^add$', 'motywatory.views.add', name='add'),
     # url(r'^jnp3/', include('jnp3.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
