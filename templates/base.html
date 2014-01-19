@@ -27,7 +27,12 @@
         <ul class="nav nav-pills pull-right">
           <li class="active"><a href="/">Home</a></li>
           {% block top_menu %}
-            <li><a href="#">Login</a></li>
+            {% if user.is_authenticated %}
+                <li class="disabled"><a>Logged in as: <b>{{ user.first_name }} {{ user.last_name }}</b></a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'social:begin' 'google' %}">Login</a></li>
+            {% endif %}
           {% endblock %}
           <li><a href="add">Add new</a></li>
         </ul>

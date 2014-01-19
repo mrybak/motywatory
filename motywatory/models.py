@@ -1,11 +1,10 @@
 from django.db import models
 
 from djangotoolbox.fields import EmbeddedModelField
+from django.contrib.auth.models import User
 
 
 class Motivator(models.Model):
     text = models.TextField()
-    author = EmbeddedModelField('User')
-
-class User(models.Model):
-    name = models.CharField(max_length=50)
+    author = EmbeddedModelField(User)
+    created_on = models.DateTimeField(auto_now_add=True, null=True)
