@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, FormView
+from django.http import HttpResponseRedirect
 
 from motywatory import recaptcha
 from motywatory.models import Motivator
 from motywatory.forms import MotivatorForm
-
 
 def index(request):
     motivators = Motivator.objects.all().order_by('created_on').reverse()
@@ -27,5 +27,5 @@ class AddView(FormView):
             form.save()
             return super(AddView, self).form_valid(form)
         else:
-            return False # todo - check this one
+            return self.form_invalid(form)
 
