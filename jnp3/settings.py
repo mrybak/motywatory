@@ -130,7 +130,7 @@ INSTALLED_APPS = (
     'haystack',
     'motywatory',
     'social.apps.django_app.default',
-    'rest_framework'
+    'rest_framework',
 )
 
 HAYSTACK_CONNECTIONS = {

@@ -1,10 +1,7 @@
-*.log
-*.pot
+venv
 *.pyc
-local_settings.py
-bin/
-lib/
-lib64
-include/
-.idea/
-local/
+*.db
+*.DS_Store
+.env
+build
+dist
