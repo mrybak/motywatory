@@ -1,9 +1,15 @@
-from django.shortcuts import render
-from django.views.generic.edit import CreateView, FormView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
+from django.shortcuts import render, redirect
+from django.views.generic.edit import FormView
+from jnp3.serializers import MotivatorSerializer
 
 from motywatory import recaptcha
 from motywatory.models import Motivator
-from motywatory.forms import MotivatorForm
+from motywatory.forms import MotivatorForm, UpdateUserForm
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 
 def index(request):
@@ -29,3 +35,28 @@ class AddView(FormView):
         else:
             return False # todo - check this one
 
+
+@api_view(['POST'])
+def add_motivator(request):
+    if request.method == 'POST':
+        serializer = MotivatorSerializer(data=request.DATA)
+        if serializer.is_valid():
+            serializer.object.author = request.user
+            serializer.save()
+            return Response(status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@login_required
+def update_user(request):
+    if request.POST:
+        form = UpdateUserForm(request.POST)
+        if form.is_valid():
+            request.user.username = form.cleaned_data.get('username')
+            request.user.password = make_password(form.cleaned_data.get('password'))
+            request.user.save()
+            return redirect('index')
+    else:
+        form = UpdateUserForm(instance=request.user)
+
+    return render(request, 'edit_user.html', {'form': form})

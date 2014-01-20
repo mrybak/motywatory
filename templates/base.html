@@ -39,7 +39,7 @@
             <ul class="nav navbar-nav navbar-right">
                 {% block top_menu %}
                     {% if user.is_authenticated %}
-                        <li class="disabled"><a>Logged in as: <b>{{ user.first_name }} {{ user.last_name }}</b></a></li>
+                        <li class="disabled"><a>Logged in as: <b>{{ user }}</b></a></li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                         <li><a href="{% url 'social:begin' 'google' %}">Login</a></li>
