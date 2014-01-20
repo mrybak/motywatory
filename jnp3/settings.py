@@ -129,7 +129,8 @@ INSTALLED_APPS = (
 
     'haystack',
     'motywatory',
-    'social.apps.django_app.default'
+    'social.apps.django_app.default',
+    'rest_framework'
 )
 
 HAYSTACK_CONNECTIONS = {
@@ -182,5 +183,17 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\','/'),)
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/"
-
 SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = "/"
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/update-user/'
+
+REST_FRAMEWORK = {
+    # Use hyperlinked styles by default.
+    # Only used if the `serializer_class` attribute is not set on a view.
+    'DEFAULT_MODEL_SERIALIZER_CLASS':
+        'rest_framework.serializers.HyperlinkedModelSerializer',
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ]
+}

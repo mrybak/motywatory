@@ -6,3 +6,4 @@ django-haystack==2.1.0
 elasticsearch==0.4.4
 pyelasticsearch==0.6.1
 pil
+djangorestframework==2.3.12

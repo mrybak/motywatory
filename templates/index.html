@@ -9,7 +9,7 @@
             <img src="/media/{{ motivator.img }}" alt="{{ motivator.text }}" class="img-responsive" />
         {% endif %}
 
-        Author: {{ motivator.author.first_name }} {{ motivator.author.last_name }}<br>
+        Author: {{ motivator.author }}<br>
         Created on: {{ motivator.created_on }}
     </div>
     {% endfor %}

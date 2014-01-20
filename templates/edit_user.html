@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load captcha %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <h2>Choose username and password</h2>
+        <form action="/update-user/" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                {{ field.errors }}
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+            {% endfor %}
+            <br />
+            <input type="submit" value="Save" class="btn btn-lg btn-success"/>
+        </form>
+    </div>
+
+{% endblock %}

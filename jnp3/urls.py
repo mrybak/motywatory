@@ -3,26 +3,24 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from motywatory.views import AddView
 
-# Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
     url(r'^$', 'motywatory.views.index', name='index'),
     url(r'^add$', login_required(AddView.as_view()), name='add'),
+    url(r'^add-motivator/$', 'motywatory.views.add_motivator'),
 
     url(r'^search/', include('haystack.urls')),
-    # url(r'^jnp3/', include('jnp3.foo.urls')),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^logout/', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
+    url(r'^update-user/$', 'motywatory.views.update_user', name='update-user'),
 )
 if settings.DEBUG:
     urlpatterns += patterns('',
