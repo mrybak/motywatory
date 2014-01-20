@@ -1,7 +1,11 @@
 # Django settings for jnp3 project.
+import os.path
+
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+
+here = lambda * x: os.path.join(os.path.abspath(os.path.dirname(__file__)), *x)
+PROJECT_ROOT = here("..")
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -45,7 +49,9 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+ABSOLUTE_PATH = lambda x: os.path.join(os.path.abspath(PROJECT_ROOT), x)
+MEDIA_ROOT = ABSOLUTE_PATH('media/')
+print MEDIA_ROOT
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.

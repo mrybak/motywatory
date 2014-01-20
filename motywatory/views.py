@@ -23,9 +23,11 @@ class AddView(FormView):
         RecaptchaRsp = recaptcha.submit(self.request.POST['recaptcha_challenge_field'], \
         self.request.POST['recaptcha_response_field'], '6LcLO-0SAAAAAMZKja_hev3pXpSDooEJ7iH-QQyp', '')
         if RecaptchaRsp.is_valid:
+            print "valid"
             form.instance.author = self.request.user
             form.save()
             return super(AddView, self).form_valid(form)
         else:
+            print "not valid"
             return self.form_invalid(form)
 

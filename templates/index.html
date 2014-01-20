@@ -5,6 +5,9 @@
     {% for motivator in motivators %}
     <div class="jumbotron">
         <h1>{{ motivator.text }}</h1>
+        {% if motivator.img %}
+            <img src="/media/{{ motivator.img }}" alt="{{ motivator.text }}" class="img-responsive" />
+        {% endif %}
 
         Author: {{ motivator.author.first_name }} {{ motivator.author.last_name }}<br>
         Created on: {{ motivator.created_on }}

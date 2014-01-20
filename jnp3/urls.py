@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from motywatory.views import AddView
 
@@ -23,3 +24,9 @@ urlpatterns = patterns('',
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^logout/', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
 )
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+    )

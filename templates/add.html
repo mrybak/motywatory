@@ -5,7 +5,7 @@
 
     <div class="jumbotron">
         <h1>Add new motivator</h1>
-        <form action="/add" method="post">
+        <form action="/add" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in form %}
             <div class="form-group">
