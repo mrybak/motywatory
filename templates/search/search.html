@@ -13,10 +13,21 @@
 
             {% for result in page.object_list %}
                 <div class="jumbotron">
-                    <h1>{{ result.object.text }}</h1>
-
-                    Author: {{ result.object.author }}<br>
-                    Created on: {{ result.object.created_on }}
+                    <div style="background: black; border: 1px solid papayawhip; padding: 55px; padding-bottom: 75px;">
+                        {% if result.object.img %}
+                            <img src="/images/{{ result.object.img.name }}" alt="{{ result.object.text }}" class="img-responsive" style="margin: 0 auto;"/>
+                        {% endif %}
+                        <h1 class="text-center">{{ result.object.text }}</h1>
+                    </div>
+                    <hr/>
+                    <p>
+                        <strong>
+                        Author: {{ result.object.author }}<br>
+                        </strong>
+                        <small>
+                        Created on: {{ result.object.created_on }}
+                        </small>
+                    </p>
                 </div>
             {% empty %}
                 <p>No motivators found.</p>

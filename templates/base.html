@@ -12,8 +12,6 @@
     <!-- Bootstrap core CSS -->
     <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.3/slate/bootstrap.min.css" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -33,7 +31,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
                 {% if user.is_authenticated %}
-                <li><a href="/add">Add new</a></li>
+                    <li><a href="/add">Add new</a></li>
                 {% endif %}
                 <li><a href="/search">Search</a></li>
             </ul>
@@ -67,16 +65,18 @@
 
 </div>
 <!-- /container -->
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript">
-    $(function() {
-       var K = 3, N = K;
-        $("#show_more").click(function() {
+    $(function () {
+        var K = 3, N = K;
+        $("#show_more").click(function () {
             var tmp = N + K;
-            $.get( "/get_motivators/"+N+"/"+tmp, function( data ) {
+            $.get("/get_motivators/" + N + "/" + tmp, function (data) {
                 if (data == "") {
-                    $("#show_more_p").html("<div class='jumbotron'><h1 style='color: papayawhip;'>Come back to work.<br/>No more motivators!</h1></div>");
+                    $("#show_more_p").html("<div class='jumbotron'><h1 style='color: papayawhip;'>Go back to work.<br/>No more motivators!</h1></div>");
                 } else {
-                    $( "#motivators" ).append( data );
+                    $("#motivators").append(data);
                     N += K;
                 }
             });
