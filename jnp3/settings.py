@@ -50,7 +50,7 @@ USE_TZ = True
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 ABSOLUTE_PATH = lambda x: os.path.join(os.path.abspath(PROJECT_ROOT), x)
-MEDIA_ROOT = ABSOLUTE_PATH('media/DUPAAA/')
+MEDIA_ROOT = ABSOLUTE_PATH('media/')
 print MEDIA_ROOT
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a

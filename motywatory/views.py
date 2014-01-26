@@ -1,12 +1,15 @@
-from django.http import HttpResponseRedirect
+from mimetypes import guess_type
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
+from jnp3 import settings
 from jnp3.serializers import MotivatorSerializer
 
 from motywatory import recaptcha
 from motywatory import tasks
+from motywatory.gridfsuploads import gridfs_storage
 from motywatory.models import Motivator
 from motywatory.forms import MotivatorForm, UpdateUserForm
 from rest_framework import status
@@ -14,8 +17,13 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 def index(request):
-    motivators = Motivator.objects.all().order_by('created_on').reverse()
-    return render(request, 'index.html', {'motivators': motivators})
+    motivators = Motivator.objects.all().order_by('created_on').reverse()[:3]
+    return render(request, 'index.html', {'motivators': motivators, 'MEDIA_ROOT': settings.MEDIA_ROOT})
+
+
+def get_motivators(request, from_no, to_no):
+    motivators = Motivator.objects.all().order_by('created_on').reverse()[from_no:to_no]
+    return render(request, 'get_motivators.html', {'motivators': motivators})
 
 class AddView(FormView):
     template_name = 'add.html'
@@ -62,3 +70,10 @@ def update_user(request):
         form = UpdateUserForm(instance=request.user)
 
     return render(request, 'edit_user.html', {'form': form})
+
+def show_image(request, path):
+    print path
+    storage = gridfs_storage
+    file = storage.open(path)
+
+    return HttpResponse(file, mimetype=guess_type(path)[0])

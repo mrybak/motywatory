@@ -12,6 +12,8 @@
     <!-- Bootstrap core CSS -->
     <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.3/slate/bootstrap.min.css" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -65,6 +67,24 @@
 
 </div>
 <!-- /container -->
+<script type="text/javascript">
+    $(function() {
+       var K = 3, N = K;
+        $("#show_more").click(function() {
+            var tmp = N + K;
+            $.get( "/get_motivators/"+N+"/"+tmp, function( data ) {
+                if (data == "") {
+                    $("#show_more_p").html("<h1 style='color: papayawhip;'>Come back to work. No more motivators</h1>");
+                } else {
+                    $( "#motivators" ).append( data );
+                    N += K;
+                }
+            });
+            return false;
+        });
+
+    });
+</script>
 
 </body>
 </html>
