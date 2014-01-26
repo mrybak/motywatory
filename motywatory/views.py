@@ -35,9 +35,9 @@ class AddView(FormView):
         # It should return an HttpResponse.
 
         # print self.request.POST
-        # RecaptchaRsp = recaptcha.submit(self.request.POST['recaptcha_challenge_field'], \
-        # self.request.POST['recaptcha_response_field'], '6LcLO-0SAAAAAMZKja_hev3pXpSDooEJ7iH-QQyp', '')
-        if True: # RecaptchaRsp.is_valid and form.is_valid():
+        RecaptchaRsp = recaptcha.submit(self.request.POST['recaptcha_challenge_field'], \
+        self.request.POST['recaptcha_response_field'], '6LcLO-0SAAAAAMZKja_hev3pXpSDooEJ7iH-QQyp', '')
+        if RecaptchaRsp.is_valid and form.is_valid():
             # form.instance.author = self.request.user
             tasks.upload_motivator.delay(form.cleaned_data.get('text'), form.cleaned_data.get('img'), self.request.user)
             return redirect('index')

@@ -9,10 +9,5 @@ from rest_framework import status
 
 @shared_task
 def upload_motivator(text, img, author):
-    print img.name
-    motywator = Motivator.objects.create(text=text, img=img, author=author)
-    # motywator.img.name = motywator.img.name.split('/')[1]
-    # print motywator.img
-    # print motywator.img.name.split('/')[1]
-    # motywator.save()
+    Motivator.objects.create(text=text, img=img, author=author)
 

@@ -74,7 +74,7 @@
             var tmp = N + K;
             $.get( "/get_motivators/"+N+"/"+tmp, function( data ) {
                 if (data == "") {
-                    $("#show_more_p").html("<h1 style='color: papayawhip;'>Come back to work. No more motivators</h1>");
+                    $("#show_more_p").html("<div class='jumbotron'><h1 style='color: papayawhip;'>Come back to work.<br/>No more motivators!</h1></div>");
                 } else {
                     $( "#motivators" ).append( data );
                     N += K;
